@@ -49,11 +49,24 @@ public abstract class Diet {
 
     //Fikse comma på slutten med en IF
     //Fikse DietName istedefor diet.
-    public void writeAllowedFood(){
-        System.out.print("The following food is allowed in this diet: ");
+
+    public String writeAllowedFood(){
+
+        String output = "";
+        //System.out.print("The following food is allowed in this diet: ");
         for (int i =0; i< allowedFood.size(); i++) {
-            System.out.println(allowedFood.get(i).getName() + "," );
+            output += allowedFood.get(i).getName() + ", ";
         }
+        return "The following food is allowed in this diet: " + output;
+
+        /*String basicOutput = "The following food is allowed in this diet: ";
+        for (int i =0; i< allowedFood.size(); i++) {
+            String temp+i = allowedFood.get(i).getName()
+        }*/
+
+
+
+
     }
 
 

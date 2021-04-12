@@ -12,9 +12,9 @@ public class test {
         ArrayList<Food> allowedFood = new ArrayList<>();
         allowedFood.add(new Food("egg",100, false,FoodType.PROTEIN));
         LowCarbDiet diet1 = new LowCarbDiet(100,"get beef", allowedFood,false,100 );
-        System.out.println(diet1.writeDuration());
 
-       diet1.writeAllowedFood();
+
+        System.out.println(diet1.writeAllowedFood());
 
 
 
