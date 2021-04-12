@@ -1,11 +1,12 @@
 package exam;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class LowCarbDiet extends Diet {
     private float minWeightKg;
 
-    public LowCarbDiet(int daysDuration, String purpose, ArrayList<Food> allowedFood, boolean isVegan, float minWeightKg) {
+    public LowCarbDiet(Integer daysDuration, String purpose, ArrayList<Food> allowedFood, boolean isVegan, float minWeightKg) {
         super(daysDuration, purpose, allowedFood, isVegan);
         this.minWeightKg = minWeightKg;
     }

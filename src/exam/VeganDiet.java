@@ -1,5 +1,6 @@
 package exam;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class VeganDiet extends Diet {
@@ -7,7 +8,9 @@ public class VeganDiet extends Diet {
 
 
     //Constructor
-    public VeganDiet(int daysDuration, String purpose, ArrayList<Food> allowedFood, boolean isVegan, float minWeightKg){
+
+
+    public VeganDiet(Integer daysDuration, String purpose, ArrayList<Food> allowedFood, boolean isVegan, float minWeightKg) {
         super(daysDuration, purpose, allowedFood, isVegan);
         this.minWeightKg = minWeightKg;
     }
