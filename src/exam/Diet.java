@@ -33,23 +33,27 @@ public abstract class Diet {
 
 
     //Methods
+
+    //Method works, we need to find a way to write "This VeganDiet" instead of "This diet"
     public String writeDuration(){
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = startDate.plusDays(this.daysDuration);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date()); // Using today's date
-        c.add(Calendar.DATE, daysDuration); // Adding days
-        String output = sdf.format(c.getTime());
-        System.out.println(output);
+        int outputYears = Period.between(startDate, endDate).getYears();
+        int outputMonths = Period.between(startDate , endDate).getMonths();
+        int outputDays = Period.between(startDate, endDate).getDays();
 
+        return "This diet lasts for "+ outputYears  +" years, " + outputMonths + " months" +" and " + outputDays + " days";
 
-
-        // return "The diet lasts for "+ years +" years, " + month + " months" +" and " + days + " days";
-        return "";
     }
 
-    public String writeAllowedFood(){
-        return "";
+    //Fikse comma på slutten med en IF
+    //Fikse DietName istedefor diet.
+    public void writeAllowedFood(){
+        System.out.print("The following food is allowed in this diet: ");
+        for (int i =0; i< allowedFood.size(); i++) {
+            System.out.println(allowedFood.get(i).getName() + "," );
+        }
     }
 
 
