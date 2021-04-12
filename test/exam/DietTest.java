@@ -76,6 +76,7 @@ public class DietTest {
 
 
 
+
     //Teste writeDuration med standard input
     //Stringen som returneres er per nå ikke riktig i forhold til eksamen.
     @Test

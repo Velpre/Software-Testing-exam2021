@@ -8,9 +8,12 @@ public class Person {
     private Diet diet;
     private float weight;
 
-    public Person(Food favoriteFood, ArrayList<Food> allergies, Diet diet, float weight) {
-        if(favoriteFood.isVegan() && diet.isVegan()){
+    //Constructor for VeganDiet
+    public Person(Food favoriteFood, ArrayList<Food> allergies, VeganDiet diet, float weight){
+        if(!favoriteFood.isVegan() && diet.isVegan()){
             throw new IllegalArgumentException("Vegan mismatch");
+        } if(weight<diet.getMinWeightKg()){
+            throw new IllegalArgumentException("Weight mismatch");
         }
         this.favoriteFood = favoriteFood;
         this.allergies = allergies;
