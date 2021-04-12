@@ -9,6 +9,9 @@ public class Person {
     private float weight;
 
     public Person(Food favoriteFood, ArrayList<Food> allergies, Diet diet, float weight) {
+        if(favoriteFood.isVegan() && diet.isVegan()){
+            throw new IllegalArgumentException("Vegan mismatch");
+        }
         this.favoriteFood = favoriteFood;
         this.allergies = allergies;
         this.diet = diet;
