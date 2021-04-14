@@ -4,26 +4,46 @@ import java.util.ArrayList;
 
 public class Person {
     private Food favoriteFood;
-    private ArrayList<Food> allergies;
+    private ArrayList<Food> allergies = null;
     private Diet diet;
     private float weight;
 
     //Constructor for VeganDiet
     public Person(Food favoriteFood, ArrayList<Food> allergies, Diet diet, float weight){
-
-        if(diet instanceof VeganDiet && diet.isVegan() && !favoriteFood.isVegan()){
+        if(allergies.size() > 0 && !checkAllergies(diet.getAllowedFood(),allergies)){
+            throw new IllegalArgumentException("To many allergies");
+        }
+        if(diet instanceof VeganDiet && !favoriteFood.isVegan()){
             throw new IllegalArgumentException("Vegan mismatch");
         }else if (diet instanceof VeganDiet && weight < ((VeganDiet) diet).getMinWeightKg()){
-            throw new IllegalArgumentException("Weight mismatch");
+            throw new IllegalArgumentException("Vegan Weight mismatch");
         }if (diet instanceof LowCarbDiet && weight < ((LowCarbDiet) diet).getMinWeightKg()){
-            throw new IllegalArgumentException("Weight mismatch");
+            throw new IllegalArgumentException("LowCarbDiet Weight mismatch");
+        }
+            this.favoriteFood = favoriteFood;
+            this.allergies = allergies;
+            this.diet = diet;
+            this.weight = weight;
         }
 
-        this.favoriteFood = favoriteFood;
-        this.allergies = allergies;
-        this.diet = diet;
-        this.weight = weight;
+    public boolean checkAllergies(ArrayList<Food> allowed, ArrayList<Food> allergies) {
+        double counter = 0;
+        double size = allowed.size();
+        double size2 = size / 2;
+        for (int i = 0; i < allowed.size(); i++) {
+            for (int j = 0; j < allergies.size(); j++) {
+                if (allowed.get(i).getName().equalsIgnoreCase(allergies.get(j).getName())) {
+                    counter++;
+                }
+            }
+
+        }if(counter >= size2){
+            return false;
+        }
+        return true;
     }
+
+
 
     public Food getFavoriteFood() {
         return favoriteFood;
