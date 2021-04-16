@@ -18,4 +18,25 @@ public class VeganDietTest {
             Assert.assertEquals("The diet must have a higher minWeight", e.getMessage());
         }
     }
+
+    //Testing creating a vegan diet, with non-vegan foods. Part of requirement 1C
+    @Test
+    public void testingVeganDietWithNonVeganFood(){
+        try {
+            ArrayList<Food> allowed = new ArrayList<>();
+            allowed.add(new Food("Tomato", 100, true, FoodType.CARB));
+            allowed.add(new Food("Potato", 100, true, FoodType.PROTEIN));
+            allowed.add(new Food("Beans", 100, true, FoodType.PROTEIN));
+            allowed.add(new Food("Peas", 100, true, FoodType.PROTEIN));
+            allowed.add(new Food("Beef", 100, false, FoodType.PROTEIN));
+
+            VeganDiet diet1 = new VeganDiet(100, "eat vegan food", allowed, true, 80.8f);
+        } catch (IllegalArgumentException e){
+            Assert.assertEquals("Expected only non-vegan food", e.getMessage());
+        }
+
+    }
+
+
+
 }
