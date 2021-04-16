@@ -24,13 +24,7 @@ public abstract class Diet {
     }
 
 
-
-
-
     /* The Diet class should implement the following methods:a.Write the duration of a diet in terms of years, months and days, e.g., “This VeganDiet lasts for 2 years, 3 months and 5 days”.b.Write the allowed food, e.g., “The following food is allowed in this FlexitarianDiet: Salad, Soup, Apple, Strawberry, Salmon”. */
-
-
-
 
     //Methods
 
