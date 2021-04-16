@@ -14,6 +14,68 @@ public class DietTest {
     // -
 
 
+    /***********************************************  Requirement 1A ********************************************/
+
+    //Testing if a diet has any non-vegan foods. If it does the diet cannot be vegan.
+    @Test
+    public void testIfAnyNonVeganFoods(){
+        try {
+            ArrayList<Food> allowed = new ArrayList<>();
+            allowed.add(new Food("Beef", 100, false, FoodType.PROTEIN));
+            allowed.add(new Food("Potato", 100, true, FoodType.PROTEIN));
+            allowed.add(new Food("Beans", 100, true, FoodType.PROTEIN));
+            allowed.add(new Food("Chicken", 100, false, FoodType.PROTEIN));
+            allowed.add(new Food("Milk", 100, false, FoodType.PROTEIN));
+
+            VeganDiet diet1 = new VeganDiet(100, "Eat vegan", allowed, true, 90.5f);
+        } catch (IllegalArgumentException e){
+            Assert.assertEquals("Expected only non-vegan food",e.getMessage());
+        }
+    }
+
+    //Testing with a empty allowedFood-array. This should not be allowed
+    @Test
+    public void testIfOnlyNonVeganFoods() {
+        try {
+            ArrayList<Food> allowed = new ArrayList<>();
+            VeganDiet diet1 = new VeganDiet(100, "Eat vegan", allowed, true, 90.5f);
+        } catch (IllegalArgumentException e) {
+            Assert.assertEquals("Need something in allowed food", e.getMessage());
+        }
+    }
+    /***********************************************  Requirement 1B ********************************************/
+
+
+    //Testing if allowedFood is only vegan, the diet becomes vegan.
+    @Test
+    public void testOnlyVeganFood(){
+        ArrayList<Food> allowed = new ArrayList<>();
+        allowed.add(new Food("Tomato", 100, true, FoodType.CARB));
+        allowed.add(new Food("Potato", 100, true, FoodType.PROTEIN));
+        allowed.add(new Food("Beans", 100, true, FoodType.PROTEIN));
+        allowed.add(new Food("Peas", 100, true, FoodType.PROTEIN));
+        allowed.add(new Food("Tofu", 100, true, FoodType.PROTEIN));
+
+        LowCarbDiet diet1 = new LowCarbDiet(100, "dont eat calories",allowed,false,90.4f);
+
+        Assert.assertTrue(diet1.isVegan());
+    }
+
+
+
+
+
+
+
+
+
+    /***********************************************  Requirement 1C ********************************************/
+
+
+
+
+
+
     //Testing writeDuration with 2 days, 0 months and 0 years.
     @Test
     public void testWriteDuration(){

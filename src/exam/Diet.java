@@ -17,6 +17,20 @@ public abstract class Diet {
     //Constructors
 
     public Diet(Integer daysDuration, String purpose, ArrayList<Food> allowedFood, boolean isVegan) {
+        if(allowedFood.size() <= 0){
+            throw new IllegalArgumentException("Need something in allowed food");
+        }
+        for (Food f :
+                allowedFood) {
+            if (!f.isVegan()) {
+                throw new IllegalArgumentException("Expected only non-vegan food");
+            }
+        }
+        //Converting non-diet to diet
+        for (Food f :
+                allowedFood) {
+            
+        }
         this.daysDuration = daysDuration;
         this.purpose = purpose;
         this.allowedFood = allowedFood;
