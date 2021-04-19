@@ -19,6 +19,8 @@ public class Person {
             throw new IllegalArgumentException("Vegan Weight mismatch");
         }if (diet instanceof LowCarbDiet && weight < ((LowCarbDiet) diet).getMinWeightKg()){
             throw new IllegalArgumentException("LowCarbDiet Weight mismatch");
+        }if (diet instanceof HypercaloricDiet && weight > ((HypercaloricDiet) diet).getMaxWeightKg()) {
+            throw new IllegalArgumentException("You weigh too much");
         }
             this.favoriteFood = favoriteFood;
             this.allergies = allergies;

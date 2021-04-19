@@ -17,11 +17,43 @@ public abstract class Diet {
     //Constructors
 
     public Diet(Integer daysDuration, String purpose, ArrayList<Food> allowedFood, boolean isVegan) {
-        this.daysDuration = daysDuration;
-        this.purpose = purpose;
-        this.allowedFood = allowedFood;
-        this.isVegan = isVegan;
-    }
+        //If allowedFood array is empty, you are not allowed to create the diet.
+        if (allowedFood.size() <= 0) {
+            throw new IllegalArgumentException("Need something in allowed food");
+        }
+        //This is our interpretation of requirement 1A. We dont see the logic in creating a non-vegan VeganDiet. See testplan for more explanation.
+        if (isVegan) {
+            for (Food f :
+                    allowedFood) {
+                if (!f.isVegan()) {
+                    throw new IllegalArgumentException("Expected only non-vegan food");
+                }
+            }
+        }
+            //Converting non-vegan diet to vegan diet
+            //Requirement 1B.
+            boolean allFoodIsVegan = false;
+            for (Food f :
+                    allowedFood) {
+                if (f.isVegan()) {
+                    allFoodIsVegan = true;
+                } else if (!f.isVegan()) {
+                    allFoodIsVegan = false;
+                    break;
+                }
+            }
+            if (allFoodIsVegan) {
+                this.daysDuration = daysDuration;
+                this.purpose = purpose;
+                this.allowedFood = allowedFood;
+                this.isVegan = true;
+            } else {
+                this.daysDuration = daysDuration;
+                this.purpose = purpose;
+                this.allowedFood = allowedFood;
+                this.isVegan = isVegan;
+            }
+        }//End of constructor
 
 
     /* The Diet class should implement the following methods:a.Write the duration of a diet in terms of years, months and days, e.g., “This VeganDiet lasts for 2 years, 3 months and 5 days”.b.Write the allowed food, e.g., “The following food is allowed in this FlexitarianDiet: Salad, Soup, Apple, Strawberry, Salmon”. */

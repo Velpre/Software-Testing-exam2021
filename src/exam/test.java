@@ -8,13 +8,16 @@ import java.util.Date;
 
 public class test {
     public static void main(String[] args) {
-        ArrayList<Food> allowedVeganFood = new ArrayList<>();
-        allowedVeganFood.add(new Food("Peas",50,true,FoodType.PROTEIN));
-        ArrayList<Food> allergies = new ArrayList<>();
-        VeganDiet diet1 = new VeganDiet(100,"eat vegan ffs",allowedVeganFood,true,100);
-        allergies.add(new Food("egg",100, false,FoodType.PROTEIN));
-        Food Beans = new Food("Beans",100, true,FoodType.PROTEIN);
-        Person person1 = new Person(Beans,allergies,diet1,80);
+        ArrayList<Food> allowed = new ArrayList<>();
+        allowed.add(new Food("Tomato", 100, true, FoodType.CARB));
+        allowed.add(new Food("Potato", 100, true, FoodType.PROTEIN));
+        allowed.add(new Food("Beans", 100, true, FoodType.PROTEIN));
+        allowed.add(new Food("Peas", 100, true, FoodType.PROTEIN));
+        allowed.add(new Food("Beef", 100, false, FoodType.PROTEIN));
+
+        LowCarbDiet diet1 = new LowCarbDiet(100, "dont eat calories",allowed,false,90.4f);
+
+        System.out.println(diet1.isVegan());
 
 
 
