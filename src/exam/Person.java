@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class Person {
     private Food favoriteFood;
     private ArrayList<Food> allergies = null;
-    private Diet diet;
+    private Diet diet = null;
     private float weight;
 
     //Constructor for VeganDiet
     public Person(Food favoriteFood, ArrayList<Food> allergies, Diet diet, float weight){
         // req 2b
-        if(allergies.size() > 0 && !checkAllergies(diet.getAllowedFood(),allergies)){
+        if(allergies.size() > 0 && diet != null && !checkAllergies(diet.getAllowedFood(),allergies)){
             throw new IllegalArgumentException("To many allergies");
         }
         // req 2a.
@@ -37,7 +37,7 @@ public class Person {
         }
 
        // help-method req 2b.
-    public boolean checkAllergies(ArrayList<Food> allowed, ArrayList<Food> allergies) {
+    public static boolean checkAllergies(ArrayList<Food> allowed, ArrayList<Food> allergies) {
         double counter = 0;
         double size = allowed.size();
         double size2 = size / 2;
