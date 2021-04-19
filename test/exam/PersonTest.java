@@ -21,12 +21,12 @@ public class PersonTest {
         allowed.add(Chicken);
         allowed.add(Milk);
 
-        LowCarbDiet diet1 = new LowCarbDiet(35,"get beef", allowed,true,70 );
-        Person person1 = new Person(beef,allergies,diet1,90);
+        LowCarbDiet diet1 = new LowCarbDiet(35,"get beef", allowed,false,70.0f );
+        Person person1 = new Person(beef,allergies,diet1,90.0f);
         Assert.assertEquals(beef,person1.getFavoriteFood());
         Assert.assertEquals(allergies, person1.getAllergies());
         Assert.assertEquals(diet1, person1.getDiet());
-        Assert.assertTrue(person1.getWeight() == 90);
+        Assert.assertTrue(person1.getWeight() == 90.0f);
     }
 
     //Testing person-constructor with negative number for weight. Should not be allowed.
@@ -46,7 +46,7 @@ public class PersonTest {
         allowed.add(Chicken);
         allowed.add(beef2);
 
-        LowCarbDiet diet1 = new LowCarbDiet(35,"get beef", allowed,true,70 );
+        LowCarbDiet diet1 = new LowCarbDiet(35,"get beef", allowed,false,70.0f );
         Person person1 = new Person(beef,allergies,diet1,90);
 
     }
@@ -57,15 +57,22 @@ public class PersonTest {
 
     // If their favorite food is non-vegan, they cannot follow a VeganDiet.
     //Expecting constructor to throw Exception using
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testNotVegan(){
-        ArrayList<Food> allowedVeganFood = new ArrayList<>();
-        allowedVeganFood.add(new Food("Peas",50,true,FoodType.PROTEIN));
-        ArrayList<Food> allergies = new ArrayList<>();
-        VeganDiet diet1 = new VeganDiet(100,"eat vegan ffs",allowedVeganFood,true,80);
-        allergies.add(new Food("egg",100, false,FoodType.PROTEIN));
-        Food beef = new Food("Beef",100, false,FoodType.PROTEIN);
-        Person person1 = new Person(beef,allergies,diet1,90);
+        try{
+            ArrayList<Food> allowedVeganFood = new ArrayList<>();
+            allowedVeganFood.add(new Food("Peas",50,true,FoodType.PROTEIN));
+            ArrayList<Food> allergies = new ArrayList<>();
+            VeganDiet diet1 = new VeganDiet(100,"eat vegan ffs",allowedVeganFood,true,80);
+            allergies.add(new Food("egg",100, false,FoodType.PROTEIN));
+            Food beef = new Food("Beef",100, false,FoodType.PROTEIN);
+            Person person1 = new Person(beef,allergies,diet1,90);
+
+        }catch (IllegalArgumentException e){
+            Assert.assertEquals("Vegan mismatch",e.getMessage());
+            System.out.println(e.getMessage());
+        }
+
 
     }
     //Testing to see if a person with no favorites is allowed to follow a VeganDiet
@@ -105,6 +112,7 @@ public class PersonTest {
             Person person1 = new Person(beef, allergies, diet1, 100);
         } catch (IllegalArgumentException e) {
             Assert.assertEquals("To many allergies", e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -171,15 +179,21 @@ public class PersonTest {
 
 //If they weigh less than the minimum requirement for a Vegan Diet, they cannot follow a Vegan Diet
 //Testing with input of weight less than the allowed weight. Expecting a thrown Exception
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testVeganWeightUnderAllowed(){
-        ArrayList<Food> allowedVeganFood = new ArrayList<>();
-        allowedVeganFood.add(new Food("Peas",50,true,FoodType.PROTEIN));
-        ArrayList<Food> allergies = new ArrayList<>();
-        VeganDiet diet1 = new VeganDiet(100,"eat vegan ffs",allowedVeganFood,true,80);
-        allergies.add(new Food("egg",100, false,FoodType.PROTEIN));
-        Food Beans = new Food("Beans",100, true,FoodType.PROTEIN);
-        Person person1 = new Person(Beans,allergies,diet1,70);
+        try{
+            ArrayList<Food> allowedVeganFood = new ArrayList<>();
+            allowedVeganFood.add(new Food("Peas",50,true,FoodType.PROTEIN));
+            ArrayList<Food> allergies = new ArrayList<>();
+            VeganDiet diet1 = new VeganDiet(100,"eat vegan ffs",allowedVeganFood,true,80);
+            allergies.add(new Food("egg",100, false,FoodType.PROTEIN));
+            Food Beans = new Food("Beans",100, true,FoodType.PROTEIN);
+            Person person1 = new Person(Beans,allergies,diet1,70);
+        }catch (IllegalArgumentException e){
+            Assert.assertEquals("Vegan Weight mismatch",e.getMessage());
+            System.out.println(e.getMessage());
+        }
+
     }
     //Testing to see if everything works with weight over minimum requirement.
     @Test
@@ -225,15 +239,21 @@ public class PersonTest {
     }
 
     //Testing LowCarbDiet with weight less than allowedMinWeight.
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testLowCarbDietWeightUnderAllowed(){
-        ArrayList<Food> allowedVeganFood = new ArrayList<>();
-        allowedVeganFood.add(new Food("Peas",50,true,FoodType.PROTEIN));
-        ArrayList<Food> allergies = new ArrayList<>();
-        LowCarbDiet diet1 = new LowCarbDiet(100,"eat lowcarb",allowedVeganFood,true,80);
-        allergies.add(new Food("egg",100, false,FoodType.PROTEIN));
-        Food Beans = new Food("Beans",100, true,FoodType.PROTEIN);
-        Person person1 = new Person(Beans,allergies,diet1,60);
+        try{
+            ArrayList<Food> allowedVeganFood = new ArrayList<>();
+            allowedVeganFood.add(new Food("Peas",50,true,FoodType.PROTEIN));
+            ArrayList<Food> allergies = new ArrayList<>();
+            LowCarbDiet diet1 = new LowCarbDiet(100,"eat lowcarb",allowedVeganFood,true,80);
+            allergies.add(new Food("egg",100, false,FoodType.PROTEIN));
+            Food Beans = new Food("Beans",100, true,FoodType.PROTEIN);
+            Person person1 = new Person(Beans,allergies,diet1,60);
+        }catch (IllegalArgumentException e){
+            Assert.assertEquals("LowCarbDiet Weight mismatch",e.getMessage());
+            System.out.println(e.getMessage());
+        }
+
 
     }
     //Testing LowCarbDiet with the exact weight requirement
@@ -255,15 +275,21 @@ public class PersonTest {
 //If they weigh more than the requirement for the hypercaloric diet they cannot be following this diet
 
     //Testing to create hypercaloricdiet with a personWeight over maxAllowedWeight. Should throw exception
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testHyperCaloricOverMaxWeight(){
-                ArrayList<Food> allowedVeganFood = new ArrayList<>();
-                allowedVeganFood.add(new Food("Peas",50,true,FoodType.PROTEIN));
-                ArrayList<Food> allergies = new ArrayList<>();
-                HypercaloricDiet diet1 = new HypercaloricDiet(100,"eat lots of calories",allowedVeganFood,true,80.0f, 60.0f);
-                allergies.add(new Food("egg",100, false,FoodType.PROTEIN));
-                Food Beans = new Food("Beans",100, true,FoodType.PROTEIN);
-                Person person1 = new Person(Beans,allergies,diet1,85.0f);
+        try{
+            ArrayList<Food> allowedVeganFood = new ArrayList<>();
+            allowedVeganFood.add(new Food("Peas",50,true,FoodType.PROTEIN));
+            ArrayList<Food> allergies = new ArrayList<>();
+            HypercaloricDiet diet1 = new HypercaloricDiet(100,"eat lots of calories",allowedVeganFood,true,80.0f, 60.0f);
+            allergies.add(new Food("egg",100, false,FoodType.PROTEIN));
+            Food Beans = new Food("Beans",100, true,FoodType.PROTEIN);
+            Person person1 = new Person(Beans,allergies,diet1,85.0f);
+        }catch (IllegalArgumentException e){
+            Assert.assertEquals("You weigh too much",e.getMessage());
+        }
+
+
     }
     //Testing to create hypercaloricdiet with a personWeight under maxAllowedWeight. Should work as intended
     @Test
