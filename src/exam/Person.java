@@ -48,7 +48,8 @@ public class Person {
                 }
             }
 
-        }if(counter >= size2){
+        }
+        if(counter >= size2){
             return false;
         }
         return true;
