@@ -59,8 +59,9 @@ public class DietManager {
 
     public static ArrayList createAllowedFood(ArrayList<Food> food, ArrayList<Food> allergies) {
         ArrayList<Food> allowedFood = new ArrayList<>();
-        boolean foundAllergy =false;
+
         for (int i = 0; i < food.size()  ; i++) {
+            boolean foundAllergy =false;
             for (int j = 0; j < allergies.size() ; j++) {
                 if(food.get(i).getName().equalsIgnoreCase(allergies.get(j).getName() ) ) {
                     foundAllergy = true;

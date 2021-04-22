@@ -218,7 +218,7 @@ public class DietManagerTest {
         Food Milk = new Food("Milk", 100, false, FoodType.PROTEIN);
         allergies.add(egg);
         allergies.add(Milk);
-        allergies.add(pasta);
+        allergies.add(peas);
 
         Person person1 = new Person(pasta,allergies,null,70.0f);
 
