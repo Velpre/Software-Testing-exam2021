@@ -8,10 +8,10 @@ public class FoodTest {
     //Tester vi at konstruktøren funker
     @Test
     public void testConstructor(){
-        Food egg = new Food("Egg", 100,false, FoodType.PROTEIN);
+        Food egg = new Food("Egg", 100.0f,false, FoodType.PROTEIN);
         //DEtte sjekker at Getteren funker
         Assert.assertEquals("Egg", egg.getName());
-        Assert.assertEquals(100, egg.getCaloriesPer100g());
+        Assert.assertEquals(100.0f, egg.getCaloriesPer100g() ,0);
     }
 
 

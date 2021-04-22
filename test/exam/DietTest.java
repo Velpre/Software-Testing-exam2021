@@ -30,6 +30,7 @@ public class DietTest {
             VeganDiet diet1 = new VeganDiet(100, "Eat vegan", allowed, true, 90.5f);
         } catch (IllegalArgumentException e){
             Assert.assertEquals("Expected only non-vegan food",e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -41,6 +42,7 @@ public class DietTest {
             VeganDiet diet1 = new VeganDiet(100, "Eat vegan", allowed, true, 90.5f);
         } catch (IllegalArgumentException e) {
             Assert.assertEquals("Need something in allowed food", e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
     /***********************************************  Requirement 1B ********************************************/
@@ -81,21 +83,28 @@ public class DietTest {
     //Testing writeDuration with 2 days, 0 months and 0 years.
     @Test
     public void testWriteDuration(){
-        LowCarbDiet diet1 = new LowCarbDiet(2,"get beef", null,false,100 );
+        ArrayList<Food> allowLowCarbFood = new ArrayList<>();
+        allowLowCarbFood.add( new Food("Beaf",20,false,FoodType.PROTEIN));
+        LowCarbDiet diet1 = new LowCarbDiet(2,"get beef", allowLowCarbFood,false,100 );
         Assert.assertEquals("This diet lasts for 0 years, 0 months and 2 days", diet1.writeDuration());
     }
 
     //Testing writeDuration more than a year
     @Test
     public void testWriteDurationOverAYear(){
-        LowCarbDiet diet1 = new LowCarbDiet(370,"get beef", null,false,100 );
+        ArrayList<Food> allowLowCarbFood = new ArrayList<>();
+        allowLowCarbFood.add( new Food("Beaf",20,false,FoodType.PROTEIN));
+        LowCarbDiet diet1 = new LowCarbDiet(370,"get beef", allowLowCarbFood,false,100 );
+
         Assert.assertEquals("This diet lasts for 1 years, 0 months and 5 days", diet1.writeDuration());
     }
 
     //Testing writeDuration with more than a month
     @Test
     public void testWriteDurationOverAMonth(){
-        LowCarbDiet diet1 = new LowCarbDiet(35,"get beef", null,false,100 );
+        ArrayList<Food> allowLowCarbFood = new ArrayList<>();
+        allowLowCarbFood.add( new Food("Beaf",20,false,FoodType.PROTEIN));
+        LowCarbDiet diet1 = new LowCarbDiet(35,"get beef", allowLowCarbFood,false,100 );
         Assert.assertEquals("This diet lasts for 0 years, 1 months and 5 days", diet1.writeDuration());
     }
 
