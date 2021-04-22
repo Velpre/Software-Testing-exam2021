@@ -33,8 +33,6 @@ public class DietManager {
             return false;
         }
 
-
-
         return true;
     }
 
@@ -47,9 +45,7 @@ public class DietManager {
 
         ArrayList<Food> allowedFood = createAllowedFood(food, person.getAllergies() );
 
-
-        HypercaloricDiet randomHcdDiet = new HypercaloricDiet(randomDuration(),purpose,allowedFood,false,80,800);
-        return randomHcdDiet;
+        return new HypercaloricDiet(randomDuration(),purpose,allowedFood,checkIfDietIsVegan(allowedFood),randomMaxWeight(person.getWeight()),randomCalorieValue());
     }
 
      private static int randomDuration(){
@@ -66,7 +62,6 @@ public class DietManager {
                 if(food.get(i).getName().equalsIgnoreCase(allergies.get(j).getName() ) ) {
                     foundAllergy = true;
                     break;
-
                 }
             }
             if(!foundAllergy){
@@ -76,7 +71,26 @@ public class DietManager {
             return allowedFood;
         }
 
+    public static boolean checkIfDietIsVegan(ArrayList<Food> allowedFood){
+        for (int i=0; i<allowedFood.size(); i++){
+            if(!allowedFood.get(i).isVegan()){
+                return false;
+            }
+        }
+        return true;
+    }
 
+    public static float randomMaxWeight(float personWeight){
+        int randomMaxWeight = (int) Math.round(Math.random()*19) +1;
+        float newPersonWeight = personWeight + randomMaxWeight;
+        return newPersonWeight;
+    }
 
+    public static float randomCalorieValue(){
+        int startValueCalories = 2000;
+        int randomCalories = (int) Math.round(Math.random()*1999) +1;
+        float totalCalories = startValueCalories+randomCalories;
+        return totalCalories;
+    }
 
 }

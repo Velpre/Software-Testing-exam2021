@@ -178,9 +178,11 @@ public class DietManagerTest {
     vi. minCaloriesPerDay: random number between 2000 and 4000.
 */
 
+    //Testing daysDuration methode (Req 4b (I))
+
     @Test
     public void testDaysDuration(){
-        int randomDays = 0;
+
         ArrayList<Food> food = new ArrayList<>();
         Food peas = new Food("Peas",100, true,FoodType.PROTEIN);
         Food pasta = new Food("Pasta", 30, true, FoodType.CARB);
@@ -202,35 +204,236 @@ public class DietManagerTest {
 
     }
 
+    //Testing that purpose message is correct. (Req 4b(II))
+
+    @Test
+    public void testPurposeMessage(){
+        ArrayList<Food> food = new ArrayList<>();
+        Food peas = new Food("Peas",100, true,FoodType.PROTEIN);
+        Food pasta = new Food("Pasta", 30, true, FoodType.CARB);
+        food.add(peas);
+        food.add(pasta);
+
+
+        ArrayList<Food> allergies = new ArrayList<>();
+        Food egg = new Food("egg", 100, false, FoodType.PROTEIN);
+        Food Milk = new Food("Milk", 100, false, FoodType.PROTEIN);
+        allergies.add(egg);
+        allergies.add(Milk);
+
+        Person person1 = new Person(pasta,allergies,null,70.0f);
+        HypercaloricDiet randomHcd =  randomDiet(person1,food);
+
+        Assert.assertEquals("Random Hypercaloric Diet", randomHcd.getPurpose());
+    }
+
+
+    //Testing (Req 4b (III))
+    // Test where some food are allergies
     @Test
     public void testCreateAllowedFoodForAllergies(){
 
         ArrayList<Food> food = new ArrayList<>();
-        Food peas = new Food("Peas",100, true,FoodType.PROTEIN);
-        Food pasta = new Food("Pasta", 30, true, FoodType.CARB);
         Food egg = new Food("egg", 100, false, FoodType.PROTEIN);
-        food.add(peas);
-        food.add(pasta);
+        Food beef = new Food("Beef", 100, false, FoodType.PROTEIN);
+        Food Chicken = new Food("Chicken", 100, false, FoodType.PROTEIN);
+        Food Milk = new Food("Milk", 100, false, FoodType.PROTEIN);
+        Food Soy = new Food("Soy", 100, false, FoodType.PROTEIN);
+        Food Beans = new Food("Beans", 100, false, FoodType.PROTEIN);
+        Food Flour = new Food("Flour", 100, false, FoodType.PROTEIN);
+        Food Shrimp = new Food("Shrimp", 100, false, FoodType.PROTEIN);
         food.add(egg);
-
+        food.add(beef);
+        food.add(Chicken);
+        food.add(Milk);
+        food.add(Soy);
+        food.add(Beans);
+        food.add(Flour);
+        food.add(Shrimp);
 
         ArrayList<Food> allergies = new ArrayList<>();
+        allergies.add(Soy);
+        allergies.add(Milk);
+        allergies.add(Flour);
+
+        Person person1 = new Person(egg,allergies,null,70.0f);
+
+        HypercaloricDiet randomHcd =  randomDiet(person1,food);
+
+        Assert.assertEquals(5,randomHcd.getAllowedFood().size() );
+    }
+    //Testing without allergies
+    @Test
+    public void testCreateAllowedFoodForAllergiesWithNullAllergies(){
+
+        ArrayList<Food> food = new ArrayList<>();
+        Food egg = new Food("egg", 100, false, FoodType.PROTEIN);
+        Food beef = new Food("Beef", 100, false, FoodType.PROTEIN);
+        Food Chicken = new Food("Chicken", 100, false, FoodType.PROTEIN);
+        Food Milk = new Food("Milk", 100, false, FoodType.PROTEIN);
+        Food Soy = new Food("Soy", 100, false, FoodType.PROTEIN);
+        Food Beans = new Food("Beans", 100, false, FoodType.PROTEIN);
+        Food Flour = new Food("Flour", 100, false, FoodType.PROTEIN);
+        Food Shrimp = new Food("Shrimp", 100, false, FoodType.PROTEIN);
+        food.add(egg);
+        food.add(beef);
+        food.add(Chicken);
+        food.add(Milk);
+        food.add(Soy);
+        food.add(Beans);
+        food.add(Flour);
+        food.add(Shrimp);
+
+        ArrayList<Food> allergies = new ArrayList<>();
+
+        Person person1 = new Person(egg,allergies,null,70.0f);
+        HypercaloricDiet randomHcd =  randomDiet(person1,food);
+        Assert.assertEquals(8,randomHcd.getAllowedFood().size() );
+    }
+
+    //Testing with only allergies
+    @Test
+    public void testCreateAllowedFoodOnlyAllergies(){
+        try{
+            ArrayList<Food> food = new ArrayList<>();
+            Food egg = new Food("egg", 100, false, FoodType.PROTEIN);
+            Food beef = new Food("Beef", 100, false, FoodType.PROTEIN);
+            Food Chicken = new Food("Chicken", 100, false, FoodType.PROTEIN);
+            Food Milk = new Food("Milk", 100, false, FoodType.PROTEIN);
+            Food Soy = new Food("Soy", 100, false, FoodType.PROTEIN);
+            Food Beans = new Food("Beans", 100, false, FoodType.PROTEIN);
+            Food Flour = new Food("Flour", 100, false, FoodType.PROTEIN);
+            Food Shrimp = new Food("Shrimp", 100, false, FoodType.PROTEIN);
+            food.add(egg);
+            food.add(beef);
+            food.add(Chicken);
+            food.add(Milk);
+            food.add(Soy);
+            food.add(Beans);
+            food.add(Flour);
+            food.add(Shrimp);
+
+            ArrayList<Food> allergies = new ArrayList<>();
+            allergies.add(egg);
+            allergies.add(beef);
+            allergies.add(Chicken);
+            allergies.add(Milk);
+            allergies.add(Soy);
+            allergies.add(Beans);
+            allergies.add(Flour);
+            allergies.add(Shrimp);
+
+            Person person1 = new Person(egg,allergies,null,70.0f);
+            HypercaloricDiet randomHcd =  randomDiet(person1,food);
+            Assert.assertEquals(0,randomHcd.getAllowedFood().size() );
+        }catch(IllegalArgumentException e){
+            Assert.assertEquals("Need something in allowed food", e.getMessage());
+        }
+    }
+
+    //Testing (Req 4b(IV))
+    //Testing that diet is not Vegan
+    @Test
+    public void testIfDietIsNotVegeterian (){
+        ArrayList<Food> food = new ArrayList<>();
+        Food egg = new Food("egg", 100, false, FoodType.PROTEIN);
+        Food beef = new Food("Beef", 100, false, FoodType.PROTEIN);
+        Food Chicken = new Food("Chicken", 100, false, FoodType.PROTEIN);
+        Food Milk = new Food("Milk", 100, false, FoodType.PROTEIN);
+        Food Soy = new Food("Soy", 100, true, FoodType.PROTEIN);
+        Food Beans = new Food("Beans", 100, false, FoodType.PROTEIN);
+        Food Flour = new Food("Flour", 100, true, FoodType.PROTEIN);
+        Food Shrimp = new Food("Shrimp", 100, true, FoodType.PROTEIN);
+        food.add(egg);
+        food.add(beef);
+        food.add(Chicken);
+        food.add(Milk);
+        food.add(Soy);
+        food.add(Beans);
+        food.add(Flour);
+        food.add(Shrimp);
+
+        ArrayList<Food> allergies = new ArrayList<>();
+        allergies.add(egg);
+        allergies.add(beef);
+
+        Person person1 = new Person(egg,allergies,null,70.0f);
+        HypercaloricDiet randomHcd =  randomDiet(person1,food);
+        Assert.assertEquals(false, randomHcd.isVegan());
+    }
+
+    //Testing that diet is Vegan
+    @Test
+    public void testIfDietIsVegeterian (){
+        ArrayList<Food> food = new ArrayList<>();
+        Food egg = new Food("egg", 100, true, FoodType.PROTEIN);
+        Food beef = new Food("Beef", 100, true, FoodType.PROTEIN);
+        Food Chicken = new Food("Chicken", 100, true, FoodType.PROTEIN);
+        Food Milk = new Food("Milk", 100, true, FoodType.PROTEIN);
+        Food Soy = new Food("Soy", 100, true, FoodType.PROTEIN);
+        Food Beans = new Food("Beans", 100, true, FoodType.PROTEIN);
+        Food Flour = new Food("Flour", 100, true, FoodType.PROTEIN);
+        Food Shrimp = new Food("Shrimp", 100, true, FoodType.PROTEIN);
+        food.add(egg);
+        food.add(beef);
+        food.add(Chicken);
+        food.add(Milk);
+        food.add(Soy);
+        food.add(Beans);
+        food.add(Flour);
+        food.add(Shrimp);
+
+        ArrayList<Food> allergies = new ArrayList<>();
+        allergies.add(egg);
+        allergies.add(beef);
+
+        Person person1 = new Person(egg,allergies,null,70.0f);
+        HypercaloricDiet randomHcd =  randomDiet(person1,food);
+        Assert.assertEquals(true, randomHcd.isVegan());
+    }
+
+    // Testing persons max weight (Req 4b(V))
+    @Test
+    public void testMaxWeight(){
+        ArrayList<Food> food = new ArrayList<>();
+        Food peas = new Food("Peas",100, true,FoodType.PROTEIN);
+        Food pasta = new Food("Pasta", 30, true, FoodType.CARB);
+        food.add(peas);
+        food.add(pasta);
+
+        ArrayList<Food> allergies = new ArrayList<>();
+        Food egg = new Food("egg", 100, false, FoodType.PROTEIN);
         Food Milk = new Food("Milk", 100, false, FoodType.PROTEIN);
         allergies.add(egg);
         allergies.add(Milk);
-        allergies.add(peas);
 
         Person person1 = new Person(pasta,allergies,null,70.0f);
 
         HypercaloricDiet randomHcd =  randomDiet(person1,food);
 
-        Assert.assertEquals(1,randomHcd.getAllowedFood().size() );
-
+        Assert.assertTrue(randomHcd.getMaxWeightKg() < person1.getWeight()+20 && randomHcd.getMaxWeightKg() > person1.getWeight());
     }
 
+    // Testing min calories (Req 4b(VI))
+    @Test
+    public void testMinCalories(){
+        ArrayList<Food> food = new ArrayList<>();
+        Food peas = new Food("Peas",100, true,FoodType.PROTEIN);
+        Food pasta = new Food("Pasta", 30, true, FoodType.CARB);
+        food.add(peas);
+        food.add(pasta);
 
+        ArrayList<Food> allergies = new ArrayList<>();
+        Food egg = new Food("egg", 100, false, FoodType.PROTEIN);
+        Food Milk = new Food("Milk", 100, false, FoodType.PROTEIN);
+        allergies.add(egg);
+        allergies.add(Milk);
 
+        Person person1 = new Person(pasta,allergies,null,70.0f);
 
+        HypercaloricDiet randomHcd =  randomDiet(person1,food);
 
+        Assert.assertTrue(randomHcd.getMinCaloriesPerDay() < 4000  && randomHcd.getMinCaloriesPerDay() > 2000);
+    }
 
 }
