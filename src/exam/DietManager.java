@@ -6,18 +6,13 @@ import static exam.Person.checkAllergies;
 
 public class DietManager {
 
-
-
-
-    // kode som validerer om personen er kompatibel med dietten.
+    // Code that check if the person is compatible with diet
     public static boolean areCompatible(Person person, Diet diet){
         // checking for too many allergies in new diet
         if(person.getAllergies().size() > 0 && !checkAllergies(diet.getAllowedFood(), person.getAllergies())){
             return false;
         }
-
         // a none-vegan person cannot follow a vegan diet.
-
         if(!person.getFavoriteFood().isVegan() && diet.isVegan()){
             return false;
         }
@@ -38,7 +33,7 @@ public class DietManager {
 
 
 
-
+    // Method for req 4B, returns random HyperCaloricDiet
     public static HypercaloricDiet randomDiet(Person person, ArrayList<Food> food){
 
         String purpose = "Random Hypercaloric Diet";
@@ -48,7 +43,8 @@ public class DietManager {
         return new HypercaloricDiet(randomDuration(),purpose,allowedFood,checkIfDietIsVegan(allowedFood),randomMaxWeight(person.getWeight()),randomCalorieValue());
     }
 
-     private static int randomDuration(){
+    //Helper method for randomDiet
+    private static int randomDuration(){
          int randomDays = (int) Math.round(Math.random()*99) +1;
          return randomDays;
     }

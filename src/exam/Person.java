@@ -61,31 +61,16 @@ public class Person {
         return favoriteFood;
     }
 
-    public void setFavoriteFood(Food favoriteFood) {
-        this.favoriteFood = favoriteFood;
-    }
-
     public ArrayList<Food> getAllergies() {
         return allergies;
-    }
-
-    public void setAllergies(ArrayList<Food> allergies) {
-        this.allergies = allergies;
     }
 
     public Diet getDiet() {
         return diet;
     }
 
-    public void setDiet(Diet diet) {
-        this.diet = diet;
-    }
-
     public float getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
-        this.weight = weight;
-    }
 }

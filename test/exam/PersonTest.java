@@ -52,9 +52,6 @@ public class PersonTest {
     }
 
     /***********************************************Testing constructor for requirement 2A*******************************************/
-
-
-
     // If their favorite food is non-vegan, they cannot follow a VeganDiet.
     //Expecting constructor to throw Exception using
     @Test
@@ -72,14 +69,10 @@ public class PersonTest {
             Assert.assertEquals("Vegan mismatch",e.getMessage());
             System.out.println(e.getMessage());
         }
-
-
     }
-    //Testing to see if a person with no favorites is allowed to follow a VeganDiet
 
-
-/***********************************************Testing constructor for requirement 2B*******************************************/
-//50% or more
+    /***********************************************Testing constructor for requirement 2B*******************************************/
+    //50% or more
     //Testing with 50% of allowed foods as allergies, should throw exception
     @Test
     public void testToManyAllergies() {
@@ -320,8 +313,4 @@ public class PersonTest {
         Assert.assertEquals(80.0f, person1.getWeight(),0);
         Assert.assertEquals("eat lots of calories",diet1.getPurpose());
     }
-
-
-
-
 }

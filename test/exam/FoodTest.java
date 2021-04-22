@@ -13,6 +13,4 @@ public class FoodTest {
         Assert.assertEquals("Egg", egg.getName());
         Assert.assertEquals(100.0f, egg.getCaloriesPer100g() ,0);
     }
-
-
 }

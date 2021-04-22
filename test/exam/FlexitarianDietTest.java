@@ -10,8 +10,7 @@ public class FlexitarianDietTest {
 
     //Testing constructor
 
-
-    //Testing FlexitarianDiet's prefferedMeat is non-vegan. Requirement 1D
+    /******************Testing FlexitarianDiet's prefferedMeat is non-vegan. Requirement 1D****************/
     @Test
     public void testFlexitarianWithNonVeganPreffered(){
         try {
@@ -26,8 +25,6 @@ public class FlexitarianDietTest {
         } catch (IllegalArgumentException e){
             Assert.assertEquals("The preferred meat in a flexitarian diet must be a non-vegan food of protein-type",e.getMessage());
         }
-
-
     }
     //Testing with a preferredMeat that has other type than PROTEIN.
     @Test
@@ -60,6 +57,5 @@ public class FlexitarianDietTest {
 
             Assert.assertEquals("eat mixed",diet1.getPurpose());
         }
-
 
     }

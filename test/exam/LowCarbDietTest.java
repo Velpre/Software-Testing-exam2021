@@ -18,7 +18,7 @@ public class LowCarbDietTest {
         }
     }
 
-    //------------------------ testing req 1 e : The maximum carb-type foods that can be included in a LowCarbDiet is two.--------------
+    /*****************testing req 1 e : The maximum carb-type foods that can be included in a LowCarbDiet is two.***********/
     @Test
     public void testWithMoreCarbTypeThanAllowed(){
 
@@ -37,7 +37,7 @@ public class LowCarbDietTest {
         }
     }
 
-
+    // Testing with 2 carb types
     @Test
     public void testWithAllowedCarbTypes(){
 
@@ -48,12 +48,11 @@ public class LowCarbDietTest {
             allowLowCarbFood.add( new Food("Beaf",20,false,FoodType.PROTEIN));
             allowLowCarbFood.add( new Food("Pork",30,false,FoodType.PROTEIN));
             allowLowCarbFood.add( new Food("Pork",30,false,FoodType.PROTEIN));
-
             LowCarbDiet diet2 = new LowCarbDiet(50,"reduce the ingestion of carbs",allowLowCarbFood,false,80.0f);
 
             Assert.assertEquals(50,diet2.getDaysDuration());
     }
-
+    // Testing with none carb types
     @Test
     public void testWithNoneCarbType(){
 
@@ -62,7 +61,6 @@ public class LowCarbDietTest {
         allowLowCarbFood.add( new Food("Pork",30,false,FoodType.PROTEIN));
         allowLowCarbFood.add( new Food("Pork",30,false,FoodType.PROTEIN));
         allowLowCarbFood.add( new Food("Rib",30,false,FoodType.FAT));
-
         LowCarbDiet diet3 = new LowCarbDiet(60,"reduce the ingestion of carbs",allowLowCarbFood,false,80.0f);
 
         Assert.assertEquals(60,diet3.getDaysDuration());

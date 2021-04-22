@@ -63,22 +63,23 @@ public class DietTest {
         Assert.assertTrue(diet1.isVegan());
     }
 
-
-
-
-
-
-
-
-
-
-
     /***********************************************  Requirement 1C ********************************************/
+    /*
+    This test is done in VeganDietTest.java
+     */
+
+    /***********************************************  Requirement 1D ********************************************/
+    /*
+    This test is done in FlexitarianDietTest.java
+     */
+
+    /***********************************************  Requirement 1E ********************************************/
+    /*
+    This test is done in LowCarbDietTest.java
+     */
 
 
-
-
-
+    /***********************************************  Requirement 3A ********************************************/
 
     //Testing writeDuration with 2 days, 0 months and 0 years.
     @Test
@@ -108,7 +109,7 @@ public class DietTest {
         Assert.assertEquals("This diet lasts for 0 years, 1 months and 5 days", diet1.writeDuration());
     }
 
-
+    /***********************************************  Requirement 3B ********************************************/
     //Testing method writeAllowedFood
     @Test
     public void testWriteAllowedFood(){
@@ -120,7 +121,7 @@ public class DietTest {
         allowedFoodList.add(new Food("Pork",100, false,FoodType.PROTEIN));
 
         LowCarbDiet diet1 = new LowCarbDiet(35,"get beef", allowedFoodList,false,100 );
-        Assert.assertEquals("The following food is allowed in this diet: egg, Salmon, Chicken, Pork, ", diet1.writeAllowedFood());
+        Assert.assertEquals("The following food is allowed in this diet: egg, Salmon, Chicken, Pork. ", diet1.writeAllowedFood());
     }
 
 

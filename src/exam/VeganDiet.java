@@ -9,7 +9,6 @@ public class VeganDiet extends Diet {
 
     //Constructor
 
-
     public VeganDiet(Integer daysDuration, String purpose, ArrayList<Food> allowedFood, boolean isVegan, float minWeightKg) {
         super(daysDuration, purpose, allowedFood, isVegan);
         if(minWeightKg < 0){
@@ -22,7 +21,4 @@ public class VeganDiet extends Diet {
         return minWeightKg;
     }
 
-    public void setMinWeightKg(float minWeightKg) {
-        this.minWeightKg = minWeightKg;
-    }
 }

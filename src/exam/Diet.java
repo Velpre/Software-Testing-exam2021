@@ -15,7 +15,6 @@ public abstract class Diet {
     private boolean isVegan;
 
     //Constructors
-
     public Diet(Integer daysDuration, String purpose, ArrayList<Food> allowedFood, boolean isVegan) {
         //If allowedFood array is empty, you are not allowed to create the diet.
         if (allowedFood.size() <= 0) {
@@ -60,7 +59,7 @@ public abstract class Diet {
 
     //Methods
 
-    //Method works, we need to find a way to write "This VeganDiet" instead of "This diet"
+    //Req 3a
     public String writeDuration(){
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = startDate.plusDays(this.daysDuration);
@@ -73,61 +72,35 @@ public abstract class Diet {
 
     }
 
-    //Fikse comma på slutten med en IF
-    //Fikse DietName istedefor diet.
-
-    public String writeAllowedFood(){
-
+    //Req 3b
+    public String writeAllowedFood() {
         String output = "";
-        //System.out.print("The following food is allowed in this diet: ");
-        for (int i =0; i< allowedFood.size(); i++) {
-            output += allowedFood.get(i).getName() + ", ";
+        for (int i = 0; i < allowedFood.size(); i++) {
+            if (i == allowedFood.size() - 1) {
+                output += allowedFood.get(i).getName() + ". ";
+            } else {
+                output += allowedFood.get(i).getName() + ", ";
+            }
         }
         return "The following food is allowed in this diet: " + output;
-
-        /*String basicOutput = "The following food is allowed in this diet: ";
-        for (int i =0; i< allowedFood.size(); i++) {
-            String temp+i = allowedFood.get(i).getName()
-        }*/
-
-
-
-
     }
-
 
     //Getters / Setters
 
-
     public int getDaysDuration() {
         return daysDuration;
-    }
-
-    public void setDaysDuration(int daysDuration) {
-        this.daysDuration = daysDuration;
     }
 
     public String getPurpose() {
         return purpose;
     }
 
-    public void setPurpose(String purpose) {
-        this.purpose = purpose;
-    }
-
     public ArrayList<Food> getAllowedFood() {
         return allowedFood;
-    }
-
-    public void setAllowedFood(ArrayList<Food> allowedFood) {
-        this.allowedFood = allowedFood;
     }
 
     public boolean isVegan() {
         return isVegan;
     }
 
-    public void setVegan(boolean vegan) {
-        isVegan = vegan;
-    }
 }

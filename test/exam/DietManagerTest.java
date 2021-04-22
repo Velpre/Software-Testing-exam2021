@@ -11,7 +11,7 @@ import static exam.DietManager.randomDiet;
 public class DietManagerTest {
 
     // Testing the Diet-Manager
-    // ------------------ Req 4a:Given a Person and a Diet, return true if they are compatible, false otherwise.-----------------
+    /********* Req 4a:Given a Person and a Diet, return true if they are compatible, false otherwise.*********/
 
     // testing a person who is allergic to the allowedFood list
     @Test
@@ -49,8 +49,6 @@ public class DietManagerTest {
         Assert.assertFalse(areCompatible(person1,diet2));
     }
 
-
-
     //  a none-vegan person cannot follow a vegan diet.
     @Test
     public void testNonVeganPersonWithVeganDiet(){
@@ -74,10 +72,8 @@ public class DietManagerTest {
         VeganDiet diet2 = new VeganDiet(100,"Eat vegan save the world",allowed,true,80.0f);
 
         Assert.assertFalse(areCompatible(person1,diet2));
-
-
     }
-
+    // Testing weight for Vegan Diet
     @Test
     public void testPersonUnderMinWeightForVeganDiet(){
         // allergies person1
@@ -99,7 +95,7 @@ public class DietManagerTest {
 
     }
 
-
+    // Testing weight for LowCarb Diet
     @Test
     public void testPersonUnderMinWeightForLowCarbDiet(){
         // allergies person1
@@ -119,7 +115,7 @@ public class DietManagerTest {
         Person person1 = new Person(peas,allergies,null,70.0f);
         Assert.assertFalse(areCompatible(person1,diet2));
     }
-
+    // Testing weight for Hypercaloric Diet
     @Test
     public void testPersonOverMaxWeightForHypercaloricDiet(){
 
@@ -141,14 +137,13 @@ public class DietManagerTest {
         Assert.assertFalse(areCompatible(person1,diet2));
 
     }
-
+    //Test veganDiet
     @Test
     public void testCompatibleVeganDiet(){
         // allergies and food
         ArrayList<Food> allergies = new ArrayList<>();
         Food peas = new Food("Peas",100, true,FoodType.PROTEIN);
         Food pasta = new Food("Pasta", 30, true, FoodType.CARB);
-
 
         // --------- new diet to test.
         Person person1 = new Person(peas,allergies,null,90.0f);
@@ -157,26 +152,9 @@ public class DietManagerTest {
         allowed2.add(peas);
         VeganDiet diet2 = new VeganDiet(100,"Eat vegan save the world",allowed2,true,80.0f);
         Assert.assertTrue(areCompatible(person1,diet2));
-
     }
 
-
-
-
-
-    //****************************************** REQ 4b**************
-
-/* Testing the RandomDiet(Person, ArrayList Food ) - Return a HyperCaloric diet
-
-  b. Given a Person and a list of Food, create a random HypercaloricDiet with the following attributes:
-    i. daysDuration: random number between 1 and 100.
-    ii. purpose: “Random diet”.
-    iii. allowedFood: all the Food from the list that the person is not allergic
-    to.
-    iv. isVegan: false if there is some non-vegan Food, true otherwise.
-    v. maxWeightKg: random number between Person.weight and Person.weight + 20.
-    vi. minCaloriesPerDay: random number between 2000 and 4000.
-*/
+    /****************************************** REQ 4b************************************/
 
     //Testing daysDuration methode (Req 4b (I))
 
@@ -188,7 +166,6 @@ public class DietManagerTest {
         Food pasta = new Food("Pasta", 30, true, FoodType.CARB);
         food.add(peas);
         food.add(pasta);
-
 
         ArrayList<Food> allergies = new ArrayList<>();
         Food egg = new Food("egg", 100, false, FoodType.PROTEIN);
@@ -228,8 +205,7 @@ public class DietManagerTest {
     }
 
 
-    //Testing (Req 4b (III))
-    // Test where some food are allergies
+    //Testing where some food are allergies (Req 4b (III))
     @Test
     public void testCreateAllowedFoodForAllergies(){
 
@@ -331,8 +307,7 @@ public class DietManagerTest {
         }
     }
 
-    //Testing (Req 4b(IV))
-    //Testing that diet is not Vegan
+    //Testing that diet is not Vegan (Req 4b(IV))
     @Test
     public void testIfDietIsNotVegeterian (){
         ArrayList<Food> food = new ArrayList<>();
