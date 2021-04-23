@@ -11,7 +11,7 @@ public class Person {
     //Constructor for VeganDiet
     public Person(Food favoriteFood, ArrayList<Food> allergies, Diet diet, float weight){
         // req 2b
-        if(allergies.size() > 0 && diet != null && !checkAllergies(diet.getAllowedFood(),allergies)){
+        if(diet != null && !checkAllergies(diet.getAllowedFood(),allergies)){
             throw new IllegalArgumentException("To many allergies");
         }
         // req 2a.

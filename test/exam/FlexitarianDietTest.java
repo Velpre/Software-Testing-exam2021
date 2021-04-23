@@ -12,7 +12,7 @@ public class FlexitarianDietTest {
 
     /******************Testing FlexitarianDiet's prefferedMeat is non-vegan. Requirement 1D****************/
     @Test
-    public void testFlexitarianWithNonVeganPreffered(){
+    public void testFlexitarianWithVeganPreffered(){
         try {
             ArrayList<Food> allowed = new ArrayList<>();
             allowed.add(new Food("Beef", 100, false, FoodType.PROTEIN));
@@ -24,6 +24,7 @@ public class FlexitarianDietTest {
             FlexitarianDiet diet1 = new FlexitarianDiet(100, "eat mixed", allowed, false, 456.5f, allowed.get(2));
         } catch (IllegalArgumentException e){
             Assert.assertEquals("The preferred meat in a flexitarian diet must be a non-vegan food of protein-type",e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
     //Testing with a preferredMeat that has other type than PROTEIN.
