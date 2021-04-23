@@ -16,10 +16,10 @@ public class DietTest {
 
     /***********************************************  Requirement 1A ********************************************/
 
-    //Testing if a diet has any non-vegan foods. If it does the diet cannot be vegan.
+    //Testing if a diet has any non-vegan foods. If it does the diet cannot be vegan -> isVegan = false.
     @Test
-    public void testIfAnyNonVeganFoods(){
-        try {
+    public void testIfAnyNonVeganFoodsLowCarb(){
+
             ArrayList<Food> allowed = new ArrayList<>();
             allowed.add(new Food("Beef", 100, false, FoodType.PROTEIN));
             allowed.add(new Food("Potato", 100, true, FoodType.PROTEIN));
@@ -27,11 +27,24 @@ public class DietTest {
             allowed.add(new Food("Chicken", 100, false, FoodType.PROTEIN));
             allowed.add(new Food("Milk", 100, false, FoodType.PROTEIN));
 
-            VeganDiet diet1 = new VeganDiet(100, "Eat vegan", allowed, true, 90.5f);
-        } catch (IllegalArgumentException e){
-            Assert.assertEquals("Expected only non-vegan food",e.getMessage());
-            System.out.println(e.getMessage());
-        }
+            // isVegan = true
+            LowCarbDiet diet1 = new LowCarbDiet(100, "reduce the ingestion of carbs", allowed, true, 90.5f);
+            Assert.assertFalse(diet1.isVegan());
+
+    }
+    @Test
+    public void testIfAnyNonVeganFoodsFlex(){
+
+            ArrayList<Food> allowed = new ArrayList<>();
+            allowed.add(new Food("Beef", 100, false, FoodType.PROTEIN));
+            allowed.add(new Food("Potato", 100, true, FoodType.PROTEIN));
+            allowed.add(new Food("Beans", 100, true, FoodType.PROTEIN));
+            allowed.add(new Food("Chicken", 100, false, FoodType.PROTEIN));
+            allowed.add(new Food("Milk", 100, false, FoodType.PROTEIN));
+
+            // isVegan = true
+            HypercaloricDiet diet1 = new HypercaloricDiet(100, "reduce the ingestion of carbs", allowed, true, 90.0f,60.0f );
+            Assert.assertFalse(diet1.isVegan());
     }
 
     //Testing with a empty allowedFood-array. This should not be allowed
@@ -124,52 +137,5 @@ public class DietTest {
         Assert.assertEquals("The following food is allowed in this diet: egg, Salmon, Chicken, Pork. ", diet1.writeAllowedFood());
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //Teste writeDuration med standard input
-    //Stringen som returneres er per nå ikke riktig i forhold til eksamen.
-    @Test
-    public void testWriteDurationOld(){
-        //Gammel test- utdatert!!!
-        /*
-        LocalDate startDate = LocalDate.of(2021,2,5);
-        LocalDate endDate= LocalDate.of(2022,5,12);
-        ArrayList<Food> allowedFood = new ArrayList<>();
-        allowedFood.add(new Food("egg",100, false,FoodType.PROTEIN));
-        LowCarbDiet diet1 = new LowCarbDiet(startDate,endDate,null,"get beef",allowedFood,false,100);
-        int test = 1;
-        Assert.assertEquals("The diet lasts for " + test + " years, 3 months and 7 days", diet1.writeDuration());*/
-
-    }
-
-    //Testing constructor
-    @Test
-    public void testConstructor(){
-    }
 
 }

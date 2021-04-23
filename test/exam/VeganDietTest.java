@@ -19,7 +19,7 @@ public class VeganDietTest {
         }
     }
 
-    //Testing creating a vegan diet, with non-vegan foods. Part of requirement 1C
+    //Part of requirement 1C : Testing creating a vegan diet, with non-vegan foods.
     @Test
     public void testingVeganDietWithNonVeganFood(){
         try {

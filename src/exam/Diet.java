@@ -20,17 +20,10 @@ public abstract class Diet {
         if (allowedFood.size() <= 0) {
             throw new IllegalArgumentException("Need something in allowed food");
         }
-        //This is our interpretation of requirement 1A. We dont see the logic in creating a non-vegan VeganDiet. See testplan for more explanation.
-        if (isVegan) {
-            for (Food f :
-                    allowedFood) {
-                if (!f.isVegan()) {
-                    throw new IllegalArgumentException("Expected only non-vegan food");
-                }
-            }
-        }
-            //Converting non-vegan diet to vegan diet
-            //Requirement 1B.
+        // REQ 1A and 1B:
+
+            //Converting non-vegan diet to vegan diet, and vice versa.
+
             boolean allFoodIsVegan = false;
             for (Food f :
                     allowedFood) {
@@ -50,7 +43,7 @@ public abstract class Diet {
                 this.daysDuration = daysDuration;
                 this.purpose = purpose;
                 this.allowedFood = allowedFood;
-                this.isVegan = isVegan;
+                this.isVegan = false;
             }
         }//End of constructor
 

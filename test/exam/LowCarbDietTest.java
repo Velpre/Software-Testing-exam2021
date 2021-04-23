@@ -15,6 +15,7 @@ public class LowCarbDietTest {
             LowCarbDiet diet1 = new LowCarbDiet(100, "eat lowcarb", allowedVeganFood, true, -80.5f);
         } catch (IllegalArgumentException e){
             Assert.assertEquals("The diet must have a higher minWeight", e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
